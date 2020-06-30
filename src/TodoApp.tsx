@@ -17,16 +17,22 @@ const TaskApp = ({store}: Props) => {
         <Text style={styles.waiting}>Waiting for tasks...</Text>
       }
       ItemSeparatorComponent={() => <View style={styles.separator} />}
-      ListHeaderComponent={<TaskForm onAdd={store.addTask} />}
+      ListHeaderComponent={
+        <TaskForm
+          onAdd={store.addTask}
+          onTitleChange={store.updateTitleField}
+          title={store.title}
+        />
+      }
       stickyHeaderIndices={[0]}
       data={store!.tasks}
       renderItem={({item}) => (
         <TaskCard
           key={item.id}
           task={item}
-          onStart={store!.startTask(item.id)}
-          onStop={store!.pauseTask(item.id)}
-          onDelete={store!.deleteTask(item.id)}
+          onStart={store.startTask(item.id)}
+          onStop={store.pauseTask(item.id)}
+          onDelete={store.deleteTask(item.id)}
         />
       )}
     />

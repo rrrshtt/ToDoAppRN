@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
 interface Props {
   onAdd: () => void;
+  onTitleChange: (value: string) => void;
+  title: string;
 }
 
-const TaskForm = ({onAdd}: Props) => {
-  const [title, setTitle] = useState<string>('');
+const TaskForm = ({onAdd, onTitleChange, title}: Props) => {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.field}
-        onChangeText={(value) => setTitle(value)}
+        onChangeText={onTitleChange}
         value={title}
       />
       <Button title="Add" onPress={onAdd} />
